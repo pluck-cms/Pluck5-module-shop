@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.2.0
+
+- The separators follow the site's language until somebody says otherwise: a
+  Dutch site writes 1.234,50, an English one 1,234.50, a Polish one 1 234,50.
+  The module knows the language already — it is handed a translator, and a
+  translator knows its locale.
+- **The symbol does not follow the language**, deliberately. English is the
+  pound, the dollar and the euro; guessing a symbol from a language is how a
+  Dublin shop ends up priced in sterling.
+- Requires rc63: `ModuleContext::locale()` is new, and so is the `$group`
+  argument `addMedia()` always used and never had.
+
 ## 2.1.0
 
 - How an amount is written is now a setting: symbol, which side, how many

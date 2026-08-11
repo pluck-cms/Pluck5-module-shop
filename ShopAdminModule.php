@@ -70,7 +70,7 @@ final class ShopAdminController
 			// How this site writes an amount. Kept by this module: a module
 			// cannot reach another module's settings, and that isolation is what
 			// stops one from setting `theme` — not worth widening for a symbol.
-			'money' => Money::settings($this->c->get('money')),
+			'money' => Money::settings($this->c->get('money'), $this->c->locale()),
 		]);
 	}
 
@@ -243,7 +243,7 @@ final class ShopAdminController
 		$this->c->render('shop/orders', [
 			'title' => $this->c->t('shop.orders.title'),
 			'orders' => $orders,
-			'money' => Money::settings($this->c->get('money')),
+			'money' => Money::settings($this->c->get('money'), $this->c->locale()),
 		]);
 	}
 

@@ -30,7 +30,23 @@ namespace Pluck\Module\Shop;
  */
 final class Money
 {
-	/** Euro, as the sites this was written for use it. */
+	/**
+	 * Separators, per language this module speaks.
+	 *
+	 * Derived from the site's language, which the module already knows: it is
+	 * handed a translator, and a translator knows its locale.
+	 *
+	 * Only the separators. **Language is not currency** — English is the pound,
+	 * the dollar and the euro, and guessing a symbol from a language is how a
+	 * Dublin shop ends up priced in sterling.
+	 */
+	private const BY_LANGUAGE = [
+		'nl' => ['decimal_point' => ',', 'thousands' => '.'],
+		'pl' => ['decimal_point' => ',', 'thousands' => ' '],
+		'en' => ['decimal_point' => '.', 'thousands' => ','],
+	];
+
+	/** Euro, as the sites this was written for use it. One field to change. */
 	private const DEFAULTS = [
 		'symbol' => '€',
 		'after' => false,
@@ -69,20 +85,25 @@ final class Money
 	 * forty lines should not ask storage forty times.
 	 *
 	 * @param mixed $stored whatever was kept under this module's `money` key
+	 * @param string $language the site's language, for the separators
 	 * @return array{symbol:string,after:bool,decimals:int,decimal_point:string,thousands:string}
 	 */
-	public static function settings(mixed $stored): array
+	public static function settings(mixed $stored, string $language = ''): array
 	{
 		$stored = is_array($stored) ? $stored : [];
 
+		// The site's language decides the separators until somebody says
+		// otherwise. A language this module does not speak keeps the defaults.
+		$defaults = (self::BY_LANGUAGE[$language] ?? []) + self::DEFAULTS;
+
 		return [
-			'symbol' => self::text($stored['symbol'] ?? null, self::DEFAULTS['symbol'], 8),
-			'after' => (bool) ($stored['after'] ?? self::DEFAULTS['after']),
+			'symbol' => self::text($stored['symbol'] ?? null, $defaults['symbol'], 8),
+			'after' => (bool) ($stored['after'] ?? $defaults['after']),
 			// Nothing above three: no currency has more, and a number with six
 			// decimals in a shop is a mistake somebody typed.
-			'decimals' => max(0, min(3, (int) ($stored['decimals'] ?? self::DEFAULTS['decimals']))),
-			'decimal_point' => self::text($stored['decimal_point'] ?? null, self::DEFAULTS['decimal_point'], 1),
-			'thousands' => self::text($stored['thousands'] ?? null, self::DEFAULTS['thousands'], 1, true),
+			'decimals' => max(0, min(3, (int) ($stored['decimals'] ?? $defaults['decimals']))),
+			'decimal_point' => self::text($stored['decimal_point'] ?? null, $defaults['decimal_point'], 1),
+			'thousands' => self::text($stored['thousands'] ?? null, $defaults['thousands'], 1, true),
 		];
 	}
 

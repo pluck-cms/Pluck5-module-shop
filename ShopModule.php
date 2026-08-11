@@ -131,7 +131,11 @@ final class ShopModule implements SiteModule, Insertable, PublicForm
 			$slug,
 			$products,
 			$urls,
-			Money::settings($storage->getModuleData('shop', 'money')),
+			Money::settings(
+				$storage->getModuleData('shop', 'money'),
+				// The language this module is speaking, which it already knows.
+				$this->translator?->locale()->code ?? '',
+			),
 		);
 	}
 
@@ -324,7 +328,11 @@ final class ShopModule implements SiteModule, Insertable, PublicForm
 			$note,
 			$lines,
 			$total,
-			Money::settings($storage->getModuleData('shop', 'money')),
+			Money::settings(
+				$storage->getModuleData('shop', 'money'),
+				// The language this module is speaking, which it already knows.
+				$this->translator?->locale()->code ?? '',
+			),
 		);
 
 		return [

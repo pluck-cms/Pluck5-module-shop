@@ -5,7 +5,7 @@
 [module:shop category=3d-prints]
 ```
 
-Requires Pluck 5.0.0-rc59 or newer.
+Requires Pluck 5.0.0-rc63 or newer.
 
 ## Installing
 
@@ -83,6 +83,9 @@ which side it goes on, how many decimals, and the two separators.
 Not a money library — no exchange rates, no locale database. **Two decimals is
 not a safe assumption**: the yen has none and the Kuwaiti, Bahraini and Omani
 dinars have three.
+
+The separators start from the site's language; the symbol does not, because
+English is the pound, the dollar and the euro.
 
 ### If you also run the cashbook module
 
