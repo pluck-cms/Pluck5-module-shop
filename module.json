@@ -1,0 +1,9 @@
+{
+	"name": "shop",
+	"title": "Shop",
+	"version": "2.1.0",
+	"author": "Bas Steelooper",
+	"license": "GPL-3.0-or-later",
+	"requires": "5.0.0-rc59",
+	"description": "Things to order, grouped by category, with prices in steps — 5 for €5, 10 for €9. One form under all of them, orders stored and mailed. No payment provider."
+}
