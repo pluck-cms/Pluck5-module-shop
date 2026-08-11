@@ -55,6 +55,7 @@ use Pluck\Admin\Controller;
 	<fieldset class="field">
 		<legend><?= $view->t('shop.product.steps') ?></legend>
 		<span class="hint"><?= $view->t('shop.product.steps_help') ?></span>
+		<span class="hint"><?= $view->t('shop.product.steps_qty_help') ?></span>
 
 		<table class="steps">
 			<thead>
@@ -91,6 +92,7 @@ use Pluck\Admin\Controller;
 
 	<div class="field">
 		<label for="order"><?= $view->t('shop.product.order') ?></label>
+		<span class="hint"><?= $view->t('shop.product.order_help') ?></span>
 		<input id="order" name="order" type="number" min="0" max="999" value="<?= e((string) $product['order']) ?>">
 	</div>
 

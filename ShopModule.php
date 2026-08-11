@@ -519,12 +519,33 @@ final class ShopModule implements SiteModule, Insertable, PublicForm
 		return $out;
 	}
 
-	/** "10 stuks", or whatever somebody called this step. */
+	/**
+	 * What one step is, with the quantity always visible.
+	 *
+	 * The label used to replace the quantity rather than describe it, so a step
+	 * called "White with carabine" priced at € 20 said nothing about being ten of
+	 * them. The first shop to use this had "10x" typed into every label by hand —
+	 * which is a person working around software, and the software was wrong.
+	 *
+	 * A label of "1" or "1x" is dropped rather than doubled: somebody who wrote
+	 * the count into the label was doing this job for us, and "1× 1x Wit" reads
+	 * like a bug.
+	 */
 	public static function stepLabel(array $tier): string
 	{
-		return ($tier['label'] ?? '') !== ''
-			? (string) $tier['label']
-			: $tier['qty'] . ' ×';
+		$qty = max(1, (int) ($tier['qty'] ?? 1));
+		$label = trim((string) ($tier['label'] ?? ''));
+
+		// A label that already starts with this count keeps its own wording.
+		if ($label !== '' && preg_match('/^' . $qty . '\s*[x×]\s*/iu', $label) === 1) {
+			return $label;
+		}
+
+		if ($label === '') {
+			return $qty . '×';
+		}
+
+		return $qty . '× ' . $label;
 	}
 
 	/**

@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.3.0
+
+- **The quantity is always shown.** A step labelled "White with carabine" at €20
+  said nothing about being ten of them, so the first shop to use this had "10x"
+  typed into every label by hand — a person working around software. A label
+  that already starts with the count keeps its own wording.
+- The order field explains itself: low first, same number sorted by name.
+
 ## 2.2.0
 
 - The separators follow the site's language until somebody says otherwise: a

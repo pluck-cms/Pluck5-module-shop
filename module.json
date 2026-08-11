@@ -1,7 +1,7 @@
 {
 	"name": "shop",
 	"title": "Shop",
-	"version": "2.2.0",
+	"version": "2.3.0",
 	"author": "Bas Steelooper",
 	"license": "GPL-3.0-or-later",
 	"requires": "5.0.0-rc63",

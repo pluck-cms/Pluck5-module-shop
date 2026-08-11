@@ -25,6 +25,13 @@ which is the same shape with a single step.
 Each step is orderable on its own, so somebody can take one bag of twenty and two
 of five without the form having to understand anything about bulk.
 
+The quantity is always put in front of the label, so "White with carabine" at €20
+reads as "10× White with carabine". A label that already starts with the count
+keeps its own wording.
+
+Products are ordered by the number in their order field, low first, and by name
+where those match — leave everything at 0 and the list is alphabetical.
+
 ## One module, not two
 
 Spring rolls and 3D prints looked like two modules for about five minutes. Both
